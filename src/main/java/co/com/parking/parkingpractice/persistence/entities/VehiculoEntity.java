@@ -15,6 +15,10 @@ public class VehiculoEntity {
     
     @Column(name = "placa", nullable = false, unique = true)
     private String placa;
+    
+    // Tipo de vehiculo M para moto C para carro
+    @Column(name = "tipo", nullable = false)
+    private String tipo;
 
 	public Integer getId() {
 		return id;
@@ -31,5 +35,13 @@ public class VehiculoEntity {
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
-    
+
+	public String getTipo() {
+		return tipo;
+	}
+
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
+	}
+	
 }

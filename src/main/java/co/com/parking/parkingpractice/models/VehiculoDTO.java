@@ -4,16 +4,16 @@ import co.com.parking.parkingpractice.persistence.entities.VehiculoEntity;
 
 public class VehiculoDTO {
 	
-    private Integer id;
     private String placa;
+    private String tipo;
     
     public VehiculoDTO() {
     	super();
     }
     
-	public VehiculoDTO(Integer id, String placa) {
+	public VehiculoDTO(String placa, String tipo) {
 		super();
-		this.id = id;
+		this.tipo = tipo;
 		this.placa = placa;
 	}
 	
@@ -24,33 +24,36 @@ public class VehiculoDTO {
 
 	public VehiculoDTO(VehiculoEntity entity) {
 		super();
-		this.id = entity.getId();
+		this.tipo = entity.getTipo();
 		this.placa = entity.getPlaca();
 	}
 
 	public VehiculoEntity convertVehiculoToEntity() {
 		VehiculoEntity entity = new VehiculoEntity();
-		entity.setId(this.getId());
+		entity.setTipo(this.getTipo());
 		entity.setPlaca(this.getPlaca());
 		return entity;
 	}
+	
+	public String getTipo() {
+		return tipo;
+	}
 
-	public Integer getId() {
-		return id;
+	public void setTipo(String tipo) {
+		this.tipo = tipo;
 	}
-	public void setId(Integer id) {
-		this.id = id;
-	}
+
 	public String getPlaca() {
 		return placa;
 	}
+	
 	public void setPlaca(String placa) {
 		this.placa = placa;
 	}
+
 	@Override
 	public String toString() {
-		return "VehiculoDTO [id=" + id + ", placa=" + placa + "]";
+		return "VehiculoDTO [placa=" + placa + ", tipo=" + tipo + "]";
 	}
 
-    
 }
