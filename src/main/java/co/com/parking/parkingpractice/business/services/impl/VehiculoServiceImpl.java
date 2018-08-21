@@ -16,8 +16,7 @@ public class VehiculoServiceImpl implements VehiculoService {
 	private VehiculoRepository vehiculoRepository;
 	
 	@Transactional
-	public VehiculoDTO saveVehivculo(VehiculoDTO vehiculo) {
+	public void saveVehivculo(VehiculoDTO vehiculo) {
 		vehiculoRepository.save(vehiculo.convertVehiculoToEntity());
-		return vehiculo;
 	}
 }

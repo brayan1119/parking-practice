@@ -6,14 +6,14 @@ import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
 
-@Entity
+@Entity(name = "vehiculo")
 public class VehiculoEntity {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     
-    @Column(name = "placa", nullable = false)
+    @Column(name = "placa", nullable = false, unique = true)
     private String placa;
 
 	public Integer getId() {

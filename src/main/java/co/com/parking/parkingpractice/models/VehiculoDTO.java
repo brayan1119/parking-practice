@@ -16,6 +16,11 @@ public class VehiculoDTO {
 		this.id = id;
 		this.placa = placa;
 	}
+	
+	public VehiculoDTO(String placa) {
+		super();
+		this.placa = placa;
+	}
 
 	public VehiculoDTO(VehiculoEntity entity) {
 		super();

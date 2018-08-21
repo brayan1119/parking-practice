@@ -4,6 +4,6 @@ import co.com.parking.parkingpractice.models.VehiculoDTO;
 
 public interface VehiculoService {
 	
-	public VehiculoDTO saveVehivculo(VehiculoDTO vehiculo);
+	public void saveVehivculo(VehiculoDTO vehiculo);
 
 }
