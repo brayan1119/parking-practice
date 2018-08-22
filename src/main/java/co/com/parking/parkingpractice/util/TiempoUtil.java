@@ -2,7 +2,7 @@ package co.com.parking.parkingpractice.util;
 
 import java.util.Calendar;
 
-public class TiempoUtil {
+public final class TiempoUtil {
 	
 	private TiempoUtil() {
 		super();

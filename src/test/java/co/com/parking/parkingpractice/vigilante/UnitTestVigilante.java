@@ -1,8 +1,8 @@
 package co.com.parking.parkingpractice.vigilante;
 
-import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
@@ -39,7 +39,7 @@ public class UnitTestVigilante {
 		
 	}
 	
-	@Test
+	@Test(expected = Test.None.class)
 	public void TestInsertPorPlacaYDia() throws ExcepcionGenerica {
 		
 		// Inicializando los objetos para la prueba
@@ -47,15 +47,8 @@ public class UnitTestVigilante {
 		//when(TiempoUtil.esLunesDomingo()).thenReturn(false);
 		VehiculoDTO vehiculo = new VehiculoDTO("AGJ93D", "M");
 		//Realizando prueba
-		boolean pasoPrueba = true;
-		try {
-			vigilanteService.ingresaVehiculo(vehiculo);
-		}catch (Exception e) {
-			pasoPrueba = false;
-		}
-		
-		// Assert
-		Assert.assertTrue(pasoPrueba);
+		vigilanteService.ingresaVehiculo(vehiculo);
+		// Assert cuando no lanza exepcion
 	}
 	
 	

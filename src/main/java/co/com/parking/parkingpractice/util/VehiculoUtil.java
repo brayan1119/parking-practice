@@ -1,8 +1,10 @@
 package co.com.parking.parkingpractice.util;
 
+import org.springframework.util.StringUtils;
+
 import co.com.parking.parkingpractice.ecxceptions.ExcepcionGenerica;
 
-public class VehiculoUtil {
+public final class VehiculoUtil {
 	
 	private static final String INICIAL_PLACA = "A"; 
 	
@@ -12,7 +14,7 @@ public class VehiculoUtil {
 	
 	public static TipoVehiculo tipoVehiculo(String tipo) throws ExcepcionGenerica{
 		
-		if(tipo == null) {
+		if(StringUtils.isEmpty(tipo)) {
 			throw new ExcepcionGenerica(MensajesUtil.MENSAJE_TIPO_VEHICULO_VACIO);
 		}
 		
@@ -30,7 +32,7 @@ public class VehiculoUtil {
 	
 	public static boolean puedeEntrarPorDigitoYDia(String placa) throws ExcepcionGenerica {
 		
-		if(placa == null) {
+		if(StringUtils.isEmpty(placa)) {
 			throw new ExcepcionGenerica(MensajesUtil.MENSAJE_PLACA_VACIA);
 		}
 		

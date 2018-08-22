@@ -40,9 +40,4 @@ public class VehiculoDTO {
 		this.placa = placa;
 	}
 
-	@Override
-	public String toString() {
-		return "VehiculoDTO [placa=" + placa + ", tipo=" + tipo + "]";
-	}
-
 }

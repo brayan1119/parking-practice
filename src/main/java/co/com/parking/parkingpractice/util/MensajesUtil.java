@@ -1,6 +1,6 @@
 package co.com.parking.parkingpractice.util;
 
-public class MensajesUtil {
+public final class MensajesUtil {
 
 	private MensajesUtil() {
 		super();
