@@ -1,4 +1,4 @@
-package co.com.parking.parkingpractice.crud;
+package co.com.parking.parkingpractice.vigilante;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -16,12 +16,12 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import co.com.parking.parkingpractice.business.services.VehiculoService;
-import co.com.parking.parkingpractice.controllers.VehiculoController;
+import co.com.parking.parkingpractice.controllers.VigilanteController;
 import co.com.parking.parkingpractice.models.VehiculoDTO;
 
 @RunWith(SpringRunner.class)
-@WebMvcTest(VehiculoController.class)
-public class TestVehiculo {
+@WebMvcTest(VigilanteController.class)
+public class IntegrationTestVigilante {
 	
     @Autowired
     private MockMvc mockMvc;    
@@ -37,10 +37,10 @@ public class TestVehiculo {
 	public void TestInsert() throws Exception {
 
 		// Inicializando los objetos para la prueba
-		String json = mapper.writeValueAsString(new VehiculoDTO("AGJ93D"));
+		String json = mapper.writeValueAsString(new VehiculoDTO("AGJ93D", "M"));
 		//Realizando la prueba
 
-		this.mockMvc.perform(post("/api/vehiculo")
+		this.mockMvc.perform(post("/api/Ingresar")
 			       .contentType(MediaType.APPLICATION_JSON)
 			       .content(json)
 			       .accept(MediaType.APPLICATION_JSON))
@@ -52,10 +52,10 @@ public class TestVehiculo {
 	public void TestInsertError() throws Exception {
 
 		// Inicializando los objetos para la prueba
-		String json = mapper.writeValueAsString(new VehiculoDTO("AGJ93D"));
+		String json = mapper.writeValueAsString(new VehiculoDTO("AGJ93D", "M"));
 		//Realizando la prueba
 		System.out.println("va a insertar");
-		this.mockMvc.perform(post("/api/vehiculo")
+		this.mockMvc.perform(post("/api/Ingresar")
 			       .contentType(MediaType.APPLICATION_JSON)
 			       .content(json)
 			       .accept(MediaType.APPLICATION_JSON))

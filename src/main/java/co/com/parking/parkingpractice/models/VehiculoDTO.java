@@ -16,17 +16,6 @@ public class VehiculoDTO {
 		this.tipo = tipo;
 		this.placa = placa;
 	}
-	
-	public VehiculoDTO(String placa) {
-		super();
-		this.placa = placa;
-	}
-
-	public VehiculoDTO(VehiculoEntity entity) {
-		super();
-		this.tipo = entity.getTipo();
-		this.placa = entity.getPlaca();
-	}
 
 	public VehiculoEntity convertVehiculoToEntity() {
 		VehiculoEntity entity = new VehiculoEntity();

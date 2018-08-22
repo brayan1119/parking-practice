@@ -8,19 +8,20 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.parking.parkingpractice.business.services.VehiculoService;
+import co.com.parking.parkingpractice.ecxceptions.ExcepcionGenerica;
 import co.com.parking.parkingpractice.models.VehiculoDTO;
 
 @RestController
 @RequestMapping("api")
-public class VehiculoController {
+public class VigilanteController {
 	
 	@Autowired
 	private VehiculoService vehiculoService;
 	
-    @RequestMapping(value = "/vehiculo", method = RequestMethod.POST)
+    @RequestMapping(value = "/Ingresar", method = RequestMethod.POST)
     @ResponseBody
-    public void saveVehiculo(@RequestBody VehiculoDTO vehiculoDTO) {
-        vehiculoService.saveVehivculo(vehiculoDTO);
+    public void ingresarVehiculo(@RequestBody VehiculoDTO vehiculoDTO) throws ExcepcionGenerica {
+        vehiculoService.insertarVehivculo(vehiculoDTO);
     }
 
 }

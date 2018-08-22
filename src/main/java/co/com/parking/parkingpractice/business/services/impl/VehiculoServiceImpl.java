@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.com.parking.parkingpractice.business.services.VehiculoService;
+import co.com.parking.parkingpractice.ecxceptions.ExcepcionGenerica;
 import co.com.parking.parkingpractice.models.VehiculoDTO;
 import co.com.parking.parkingpractice.persistence.repositories.VehiculoRepository;
 
@@ -16,7 +17,12 @@ public class VehiculoServiceImpl implements VehiculoService {
 	private VehiculoRepository vehiculoRepository;
 	
 	@Transactional
-	public void saveVehivculo(VehiculoDTO vehiculo) {
+	public void insertarVehivculo(VehiculoDTO vehiculo) throws ExcepcionGenerica {
 		vehiculoRepository.save(vehiculo.convertVehiculoToEntity());
+	}
+	
+	@Transactional
+	public int contarVehiculoXTipo(String tipo) {
+		return vehiculoRepository.contarVehiculoXTipo(tipo);
 	}
 }
