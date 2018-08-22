@@ -1,14 +1,9 @@
 package co.com.parking.parkingpractice.vigilante;
 
+import org.junit.Assert;
 import org.junit.Test;
 import org.junit.runner.RunWith;
-import org.mockito.junit.MockitoJUnitRunner;
-import org.powermock.api.mockito.PowerMockito;
-import org.powermock.core.classloader.annotations.PrepareForTest;
-import org.powermock.modules.junit4.PowerMockRunner;
-import org.powermock.modules.junit4.PowerMockRunnerDelegate;
-import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.autoconfigure.web.servlet.AutoConfigureMockMvc;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.test.context.junit4.SpringRunner;
 
@@ -18,13 +13,13 @@ import co.com.parking.parkingpractice.business.services.VehiculoService;
 import co.com.parking.parkingpractice.business.services.VigilanteService;
 import co.com.parking.parkingpractice.ecxceptions.ExcepcionGenerica;
 import co.com.parking.parkingpractice.models.VehiculoDTO;
-import co.com.parking.parkingpractice.util.VehiculoUtil;
+import co.com.parking.parkingpractice.util.TiempoUtil;
 
 @RunWith(SpringRunner.class)
-@PrepareForTest({VehiculoUtil.class})
+@AutoConfigureMockMvc
 public class UnitTestVigilante {
 	
-	@Autowired
+	@MockBean
     private VigilanteService vigilanteService;
 	
 	@MockBean
@@ -35,13 +30,32 @@ public class UnitTestVigilante {
 	public void TestNoInsertPorPlacaYDia() throws ExcepcionGenerica {
 		
 		// Inicializando los objetos para la prueba
-		PowerMockito.mockStatic(VehiculoUtil.class);
-		when(VehiculoUtil.puedeEntrarPorDigitoYDia("AGJ93D")).thenReturn(false);
+		//PowerMockito.mockStatic(VehiculoUtil.class);
+		when(TiempoUtil.esLunesDomingo()).thenReturn(true);
 		VehiculoDTO vehiculo = new VehiculoDTO("AGJ93D", "M");
 		//Realizando prueba
 		vigilanteService.ingresaVehiculo(vehiculo);
 		// Assert cuando el metodo arroje la excepcion ExcepcionGenerica
 		
+	}
+	
+	@Test
+	public void TestInsertPorPlacaYDia() throws ExcepcionGenerica {
+		
+		// Inicializando los objetos para la prueba
+		//PowerMockito.mockStatic(VehiculoUtil.class);
+		//when(TiempoUtil.esLunesDomingo()).thenReturn(false);
+		VehiculoDTO vehiculo = new VehiculoDTO("AGJ93D", "M");
+		//Realizando prueba
+		boolean pasoPrueba = true;
+		try {
+			vigilanteService.ingresaVehiculo(vehiculo);
+		}catch (Exception e) {
+			pasoPrueba = false;
+		}
+		
+		// Assert
+		Assert.assertTrue(pasoPrueba);
 	}
 	
 	

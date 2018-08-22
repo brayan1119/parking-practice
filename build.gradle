@@ -32,9 +32,8 @@ dependencies {
 	compile('com.h2database:h2')
 	testCompile('org.springframework.boot:spring-boot-starter-test')
 	/*testCompile group: 'org.powermock', name: 'powermock-api-mockito', version: '1.7.4'
-	testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: '1.7.4'
-	testCompile group: 'org.powermock', name: 'powermock-module-junit4-rule', version: '1.7.4'
-	testCompile group: 'org.powermock', name: 'powermock-classloading-xstream', version: '1.7.4'
+	/*testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: '1.7.4'
+	/*testCompile group: 'org.mockito', name: 'mockito-core', version: '1.10.19'
 	testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'*/
 	
 }
