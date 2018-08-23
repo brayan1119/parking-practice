@@ -2,20 +2,23 @@ package co.com.parking.parkingpractice.util;
 
 import org.springframework.util.StringUtils;
 
-import co.com.parking.parkingpractice.ecxceptions.ExcepcionGenerica;
+import co.com.parking.parkingpractice.constantes.MensajesConstantes;
+import co.com.parking.parkingpractice.ecxceptions.ExecptionCampoInvalido;
 
-public final class VehiculoUtil {
+public class VehiculoUtil {
 	
-	private static final String INICIAL_PLACA = "A"; 
+	private static final String INICIAL_PLACA = "A";
+	private static final String NOMBRE_CAMPO_TIPO = "Tipo Vehiculo";
+	private static final String NOMBRE_CAMPO_PLACA = "Placa Vehiculo";
 	
-	private VehiculoUtil() {
+	public VehiculoUtil() {
 		super();
 	}
 	
-	public static TipoVehiculo tipoVehiculo(String tipo) throws ExcepcionGenerica{
+	public TipoVehiculo tipoVehiculo(String tipo) throws ExecptionCampoInvalido{
 		
 		if(StringUtils.isEmpty(tipo)) {
-			throw new ExcepcionGenerica(MensajesUtil.MENSAJE_TIPO_VEHICULO_VACIO);
+			throw new ExecptionCampoInvalido(MensajesConstantes.MENSAJE_TIPO_VEHICULO_VACIO, NOMBRE_CAMPO_TIPO);
 		}
 		
 		TipoVehiculo vehiculo = null;
@@ -25,18 +28,19 @@ public final class VehiculoUtil {
 		} else if(TipoVehiculo.CARRO.getTipo().equals(tipo)) {
 			vehiculo = TipoVehiculo.CARRO;
 		} else {
-			throw new ExcepcionGenerica(MensajesUtil.MENSAJE_TIPO_VEHICULO_INVALIDO);
+			throw new ExecptionCampoInvalido(MensajesConstantes.MENSAJE_TIPO_VEHICULO_INVALIDO, NOMBRE_CAMPO_TIPO);
 		}
 		return vehiculo;
 	}
 	
-	public static boolean puedeEntrarPorDigitoYDia(String placa) throws ExcepcionGenerica {
+	public boolean puedeEntrarPorDigitoYDia(String placa) throws ExecptionCampoInvalido {
 		
+		TiempoUtil tiempoUtil = new TiempoUtil();
 		if(StringUtils.isEmpty(placa)) {
-			throw new ExcepcionGenerica(MensajesUtil.MENSAJE_PLACA_VACIA);
+			throw new ExecptionCampoInvalido(MensajesConstantes.MENSAJE_PLACA_VACIA, NOMBRE_CAMPO_PLACA);
 		}
 		
-		return !(placa.startsWith(INICIAL_PLACA) && TiempoUtil.esLunesDomingo());
+		return !(placa.startsWith(INICIAL_PLACA) && tiempoUtil.esLunesDomingo());
 	}
 
 }

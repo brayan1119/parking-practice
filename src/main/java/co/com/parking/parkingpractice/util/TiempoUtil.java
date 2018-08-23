@@ -2,18 +2,23 @@ package co.com.parking.parkingpractice.util;
 
 import java.util.Calendar;
 
-public final class TiempoUtil {
+public class TiempoUtil {
 	
-	private TiempoUtil() {
+	public TiempoUtil() {
 		super();
 	}
 	
-	public static boolean esLunesDomingo() {
+	public boolean esLunesDomingo() {
 		
-		Calendar calendar = Calendar.getInstance();
-		int day = calendar.get(Calendar.DAY_OF_WEEK);
-		
+		int day = getDateToday();
 		return day == Calendar.SUNDAY || day == Calendar.MONDAY;
 	}
 
+	public Calendar getDateInstant() {
+		return Calendar.getInstance();
+	}
+	
+	public int getDateToday() {
+		return getDateInstant().get(Calendar.DAY_OF_WEEK);
+	}
 }
