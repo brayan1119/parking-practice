@@ -9,10 +9,8 @@ import co.com.parking.parkingpractice.business.services.CobroService;
 import co.com.parking.parkingpractice.business.services.VehiculoService;
 import co.com.parking.parkingpractice.business.services.VigilanteService;
 import co.com.parking.parkingpractice.constantes.MensajesConstantes;
-import co.com.parking.parkingpractice.ecxceptions.ExceptionSalidaNoRegistrada;
-import co.com.parking.parkingpractice.ecxceptions.ExceptionTarifaNoEncontrada;
+import co.com.parking.parkingpractice.ecxceptions.ExcepcionGenerica;
 import co.com.parking.parkingpractice.ecxceptions.ExceptionVehiculoParqueado;
-import co.com.parking.parkingpractice.ecxceptions.ExecptionCampoInvalido;
 import co.com.parking.parkingpractice.ecxceptions.ExecptionNoHayEspacioTipoVehiculo;
 import co.com.parking.parkingpractice.ecxceptions.ExecptionNoPuedeIngresarProresticcionPlacaDia;
 import co.com.parking.parkingpractice.ecxceptions.ExecptionVehiculoNoPaqueado;
@@ -33,7 +31,7 @@ public class VigilanteServiceImpl implements VigilanteService {
 	private VehiculoUtil vehiculoUtil;
 	
 	@Override
-	public void ingresaVehiculo(VehiculoDTO vehiculo) throws ExceptionVehiculoParqueado, ExecptionNoHayEspacioTipoVehiculo, ExecptionCampoInvalido, ExecptionNoPuedeIngresarProresticcionPlacaDia {
+	public void ingresaVehiculo(VehiculoDTO vehiculo) throws ExcepcionGenerica {
 		
 		
 		int numVehiculo = vehiculoService.contarVehiculoXTipo(vehiculo.getTipo());
@@ -52,7 +50,7 @@ public class VigilanteServiceImpl implements VigilanteService {
 	}
 	
 	@Override
-	public SalidaVehiculoDTO salirVehiculo(VehiculoDTO vehiculo) throws ExceptionTarifaNoEncontrada, ExecptionVehiculoNoPaqueado, ExceptionSalidaNoRegistrada {
+	public SalidaVehiculoDTO salirVehiculo(VehiculoDTO vehiculo) throws ExcepcionGenerica {
 
 		SalidaVehiculoDTO salidaVehiculoDTO;
 		if(vehiculoService.validarVehiculoEstaAdentro(vehiculo.getPlaca())) {

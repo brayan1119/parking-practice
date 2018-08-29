@@ -1,6 +1,6 @@
 package co.com.parking.parkingpractice.ecxceptions;
 
-public class ExceptionSalidaNoRegistrada extends Exception{
+public class ExceptionSalidaNoRegistrada extends ExcepcionGenerica{
 
 	/**
 	 * 

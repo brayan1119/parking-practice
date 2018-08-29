@@ -62,6 +62,6 @@ public class VehiculoServiceImpl implements VehiculoService {
 	public VehiculoDTO obtenerVehiculoXPlaca(String placa) {
 		Optional<VehiculoEntity> vehiculo = vehiculoRepository.findById(placa);
 		
-		return vehiculo.map(vehiculoEntity -> new VehiculoDTO(vehiculoEntity)).orElse(null);
+		return vehiculo.map(VehiculoDTO :: new ).orElse(null);
 	}
 }

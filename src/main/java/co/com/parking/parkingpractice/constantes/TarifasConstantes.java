@@ -1,6 +1,6 @@
 package co.com.parking.parkingpractice.constantes;
 
-public class TarifasConstantes {
+public final class TarifasConstantes {
 	
 	private TarifasConstantes() {
 		super();

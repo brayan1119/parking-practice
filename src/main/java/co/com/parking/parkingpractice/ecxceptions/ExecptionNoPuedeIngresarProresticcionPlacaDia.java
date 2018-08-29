@@ -1,6 +1,6 @@
 package co.com.parking.parkingpractice.ecxceptions;
 
-public class ExecptionNoPuedeIngresarProresticcionPlacaDia extends Exception {
+public class ExecptionNoPuedeIngresarProresticcionPlacaDia extends ExcepcionGenerica {
 
 	/**
 	 * 

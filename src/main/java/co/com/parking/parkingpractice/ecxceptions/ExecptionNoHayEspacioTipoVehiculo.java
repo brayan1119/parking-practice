@@ -1,6 +1,6 @@
 package co.com.parking.parkingpractice.ecxceptions;
 
-public class ExecptionNoHayEspacioTipoVehiculo extends Exception {
+public class ExecptionNoHayEspacioTipoVehiculo extends ExcepcionGenerica {
 
 	/**
 	 * 

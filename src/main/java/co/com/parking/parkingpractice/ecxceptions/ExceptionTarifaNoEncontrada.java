@@ -1,6 +1,6 @@
 package co.com.parking.parkingpractice.ecxceptions;
 
-public class ExceptionTarifaNoEncontrada extends Exception {
+public class ExceptionTarifaNoEncontrada extends ExcepcionGenerica {
 
 	/**
 	 * 

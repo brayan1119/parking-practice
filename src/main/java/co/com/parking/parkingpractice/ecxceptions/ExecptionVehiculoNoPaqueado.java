@@ -1,6 +1,6 @@
 package co.com.parking.parkingpractice.ecxceptions;
 
-public class ExecptionVehiculoNoPaqueado extends Exception {
+public class ExecptionVehiculoNoPaqueado extends ExcepcionGenerica {
 
 	/**
 	 * 

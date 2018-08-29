@@ -10,13 +10,7 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RestController;
 
 import co.com.parking.parkingpractice.business.services.VigilanteService;
-import co.com.parking.parkingpractice.ecxceptions.ExceptionSalidaNoRegistrada;
-import co.com.parking.parkingpractice.ecxceptions.ExceptionTarifaNoEncontrada;
-import co.com.parking.parkingpractice.ecxceptions.ExceptionVehiculoParqueado;
-import co.com.parking.parkingpractice.ecxceptions.ExecptionCampoInvalido;
-import co.com.parking.parkingpractice.ecxceptions.ExecptionNoHayEspacioTipoVehiculo;
-import co.com.parking.parkingpractice.ecxceptions.ExecptionNoPuedeIngresarProresticcionPlacaDia;
-import co.com.parking.parkingpractice.ecxceptions.ExecptionVehiculoNoPaqueado;
+import co.com.parking.parkingpractice.ecxceptions.ExcepcionGenerica;
 import co.com.parking.parkingpractice.models.SalidaVehiculoDTO;
 import co.com.parking.parkingpractice.models.VehiculoDTO;
 
@@ -29,12 +23,12 @@ public class VigilanteController {
 	private VigilanteService vigilanteService;
 	
     @RequestMapping(value = "/ingresar", method = RequestMethod.POST)
-    public void ingresarVehiculo(@RequestBody VehiculoDTO vehiculoDTO) throws ExceptionVehiculoParqueado, ExecptionNoHayEspacioTipoVehiculo, ExecptionCampoInvalido, ExecptionNoPuedeIngresarProresticcionPlacaDia {
+    public void ingresarVehiculo(@RequestBody VehiculoDTO vehiculoDTO) throws ExcepcionGenerica {
     	vigilanteService.ingresaVehiculo(vehiculoDTO);
     }
 
     @RequestMapping(value = "/salir", method = RequestMethod.POST)
-    public ResponseEntity<SalidaVehiculoDTO> salirVehiculo(@RequestBody VehiculoDTO vehiculoDTO) throws ExceptionTarifaNoEncontrada, ExecptionVehiculoNoPaqueado, ExceptionSalidaNoRegistrada {
+    public ResponseEntity<SalidaVehiculoDTO> salirVehiculo(@RequestBody VehiculoDTO vehiculoDTO) throws ExcepcionGenerica {
     	return new ResponseEntity<>(vigilanteService.salirVehiculo(vehiculoDTO), HttpStatus.OK);
     }
 }
