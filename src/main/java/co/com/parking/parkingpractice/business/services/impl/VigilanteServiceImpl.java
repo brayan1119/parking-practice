@@ -29,15 +29,18 @@ public class VigilanteServiceImpl implements VigilanteService {
 	@Autowired
 	private CobroService cobroService;
 	
+	@Autowired
+	private VehiculoUtil vehiculoUtil;
+	
 	@Override
 	public void ingresaVehiculo(VehiculoDTO vehiculo) throws ExceptionVehiculoParqueado, ExecptionNoHayEspacioTipoVehiculo, ExecptionCampoInvalido, ExecptionNoPuedeIngresarProresticcionPlacaDia {
 		
-		VehiculoUtil vehiculoUtil = new VehiculoUtil();
 		
 		int numVehiculo = vehiculoService.contarVehiculoXTipo(vehiculo.getTipo());
 		boolean hayEspacioVehiculo = numVehiculo <= vehiculoUtil.tipoVehiculo(vehiculo.getTipo()).getTope();
 		boolean puedeEntrarPorDigitoYDia = vehiculoUtil.puedeEntrarPorDigitoYDia(vehiculo.getPlaca());
-		if (hayEspacioVehiculo && puedeEntrarPorDigitoYDia && !vehiculoService.validarVehiculoEstaAdentro(vehiculo.getPlaca())) {
+		validarVehiculoAdentro(vehiculo.getPlaca());
+		if (hayEspacioVehiculo && puedeEntrarPorDigitoYDia) {
 			vehiculo.setFechaIngreso(new Date());
 			vehiculoService.insertarVehivculo(vehiculo);
 		}else if(!hayEspacioVehiculo){
@@ -52,17 +55,24 @@ public class VigilanteServiceImpl implements VigilanteService {
 	public SalidaVehiculoDTO salirVehiculo(VehiculoDTO vehiculo) throws ExceptionTarifaNoEncontrada, ExecptionVehiculoNoPaqueado, ExceptionSalidaNoRegistrada {
 
 		SalidaVehiculoDTO salidaVehiculoDTO;
-		try {
-			vehiculoService.validarVehiculoEstaAdentro(vehiculo.getPlaca());
-			throw new ExecptionVehiculoNoPaqueado(MensajesConstantes.MENSAJE_VEHICULO_NO_IPARQUEADO); 
-		} catch (ExceptionVehiculoParqueado e) {
+		if(vehiculoService.validarVehiculoEstaAdentro(vehiculo.getPlaca())) {
 			vehiculo = vehiculoService.obtenerVehiculoXPlaca(vehiculo.getPlaca());
 			vehiculo.setFechaSalida(new Date());
 			salidaVehiculoDTO = new SalidaVehiculoDTO(vehiculo);
 			salidaVehiculoDTO.setMontoCancelar(cobroService.calcularCobroVehiculo(vehiculo));
 			vehiculoService.actualizarSalidaVehiculo(vehiculo);
+		}else {
+            throw new ExecptionVehiculoNoPaqueado(MensajesConstantes.MENSAJE_VEHICULO_NO_PARQUEADO); 
 		}
+
 		return salidaVehiculoDTO;
+	}
+	
+	private void validarVehiculoAdentro(String placa) throws ExceptionVehiculoParqueado {
+		boolean vehiculoAdentro = vehiculoService.validarVehiculoEstaAdentro(placa);
+		if (vehiculoAdentro) {
+			throw new ExceptionVehiculoParqueado(MensajesConstantes.MENSAJE_VEHICULO_YA_ESTA_EN_PARQUEO);
+		}
 	}
 
 }

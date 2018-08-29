@@ -2,6 +2,9 @@ package co.com.parking.parkingpractice.util;
 
 import java.util.Calendar;
 
+import org.springframework.stereotype.Component;
+
+@Component
 public class TiempoUtil {
 	
 	public TiempoUtil() {

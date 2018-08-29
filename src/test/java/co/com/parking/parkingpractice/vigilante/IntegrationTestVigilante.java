@@ -3,77 +3,90 @@ package co.com.parking.parkingpractice.vigilante;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
-import org.springframework.boot.test.mock.mockito.MockBean;
-import org.springframework.http.MediaType;
-import org.springframework.test.annotation.Rollback;
-import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
-import org.springframework.test.web.servlet.MockMvc;
+import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.boot.test.web.client.TestRestTemplate;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.junit4.SpringRunner;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
+import static org.junit.Assert.assertEquals;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
-
-import co.com.parking.parkingpractice.business.services.VehiculoService;
-import co.com.parking.parkingpractice.business.services.VigilanteService;
-import co.com.parking.parkingpractice.controllers.VigilanteController;
+import co.com.parking.parkingpractice.models.SalidaVehiculoDTO;
 import co.com.parking.parkingpractice.models.VehiculoDTO;
 
-@RunWith(SpringJUnit4ClassRunner.class)
-@WebMvcTest(VigilanteController.class)
+@RunWith(SpringRunner.class)
+@SpringBootTest(webEnvironment = SpringBootTest.WebEnvironment.RANDOM_PORT)
 public class IntegrationTestVigilante {
 	
+
     @Autowired
-    private MockMvc mockMvc;    
+    private TestRestTemplate restTemplate;
     
-	@Autowired
-	private ObjectMapper mapper;
+    /*@Before
+    public void setUp() {
+    	VehiculoDTO vehiculoDTO = new VehiculoDTO("LGG93D", "M");
+    	vehiculoDTO.setFechaIngreso(new Date());
+    	service.insertarVehivculo(vehiculoDTO);
+    }
     
-    @MockBean
-    private VehiculoService service;
-    
-    @MockBean
-    private VigilanteService vigilanteService;
+    @After
+    public void Restart() throws ExceptionSalidaNoRegistrada {
+    	VehiculoDTO vehiculoDTO = new VehiculoDTO("LGG93D", "M");
+    	vehiculoDTO.setFechaIngreso(new Date());
+    	service.actualizarSalidaVehiculo(vehiculoDTO);
+    }*/
 	
     // Prueba para realizar una insercion de un vehiculo 
 	@Test
-	@Rollback
 	public void TestInsert() throws Exception {
 
-		// Inicializando los objetos para la prueba
-		String json = mapper.writeValueAsString(new VehiculoDTO("AGJ93D", "M"));
 		//Realizando la prueba
+		
+        ResponseEntity<String> responseEntity =
+            restTemplate.postForEntity("/api/ingresar", new VehiculoDTO("LGJ93D", "M"), String.class);
 
-		this.mockMvc.perform(post("/api/ingresar")
-			       .contentType(MediaType.APPLICATION_JSON)
-			       .content(json)
-			       .accept(MediaType.APPLICATION_JSON))
-					// Assert prueba
-			       .andDo(print()).andExpect(status().isOk());
+        assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
 	}
 	
-	//@Test
+	@Test
 	public void TestInsertError() throws Exception {
 
 		// Inicializando los objetos para la prueba
-		String json = mapper.writeValueAsString(new VehiculoDTO("AGJ93D", "M"));
-		//Realizando la prueba
-		System.out.println("va a insertar");
-		this.mockMvc.perform(post("/api/Ingresar")
-			       .contentType(MediaType.APPLICATION_JSON)
-			       .content(json)
-			       .accept(MediaType.APPLICATION_JSON))
-				.andDo(print());
-		// Volviendo a insertar
-		System.out.println("Volviendo a insertar");
-		this.mockMvc.perform(post("/api/vehiculo")
-			       .contentType(MediaType.APPLICATION_JSON)
-			       .content(json)
-			       .accept(MediaType.APPLICATION_JSON))
-					// Assert prueba
-			       .andDo(print()).andExpect(status().is5xxServerError());
-		System.out.println("termino de insertar");
+		
+		ResponseEntity<String> responseEntity =
+	            restTemplate.postForEntity("/api/ingresar", new VehiculoDTO("KXZ66E", "M"), String.class);
+		responseEntity =
+	            restTemplate.postForEntity("/api/ingresar", new VehiculoDTO("KXZ66E", "M"), String.class);
+		
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
+	}
+	
+	@Test
+	public void TestSalir() throws Exception {
+
+		// Inicializando los objetos para la prueba
+		VehiculoDTO vehiculoDTO = new VehiculoDTO("SXZ66E", "M");
+		
+		restTemplate.postForEntity("/api/ingresar", vehiculoDTO, String.class);
+		ResponseEntity<SalidaVehiculoDTO> responseEntity1 =
+	            restTemplate.postForEntity("/api/salir", vehiculoDTO, SalidaVehiculoDTO.class);
+		
+		assertEquals(HttpStatus.OK, responseEntity1.getStatusCode());
+		assertEquals(vehiculoDTO.getPlaca(), responseEntity1.getBody().getPlaca());
+		
+	}
+	
+	@Test
+	public void TestSalirDias() throws Exception {
+
+		// Inicializando los objetos para la prueba
+		VehiculoDTO vehiculoDTO = new VehiculoDTO("KXZ66E", "M");
+		
+		ResponseEntity<SalidaVehiculoDTO> responseEntity1 =
+	            restTemplate.postForEntity("/api/salir", vehiculoDTO, SalidaVehiculoDTO.class);
+		
+		assertEquals(HttpStatus.OK, responseEntity1.getStatusCode());
+		assertEquals(vehiculoDTO.getPlaca(), responseEntity1.getBody().getPlaca());
+		
 	}
 }

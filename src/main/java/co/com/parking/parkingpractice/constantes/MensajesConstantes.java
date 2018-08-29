@@ -14,5 +14,5 @@ public final class MensajesConstantes {
 	public static final String MENSAJE_VEHICULO_YA_ESTA_EN_PARQUEO = "El vehiculo no puede ingresar por que ya esta adentro";
 	public static final String MENSAJE_TARIFA_NO_ENCONTRADA = "La tarifa no fue encontrada";
 	public static final String MENSAJE_SALIDA_NO_REGISTRADA = "La salida del vehiculo no fue registrada";
-	public static final String MENSAJE_VEHICULO_NO_IPARQUEADO = "El vehiculo no ha ingresado al parqueadero";
+	public static final String MENSAJE_VEHICULO_NO_PARQUEADO = "El vehiculo no ha ingresado al parqueadero";
 }

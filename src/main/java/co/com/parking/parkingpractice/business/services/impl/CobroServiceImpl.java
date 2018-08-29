@@ -45,6 +45,7 @@ public class CobroServiceImpl implements CobroService {
 		return cobro;
 	}
 	
+	@Override
 	public int calcularHorasParaCobrar(double horas, VehiculoDTO vehiculo) throws ExceptionTarifaNoEncontrada {
 		int cobro = 0;
 		
@@ -57,6 +58,7 @@ public class CobroServiceImpl implements CobroService {
 		return cobro;
 	}
 	
+	@Override
 	public double diferenciaTiempoHoras(Date fechaInicio, Date fechaFin) {
 		return (double)(fechaFin.getTime() - fechaInicio.getTime()) / HORAS_MILISEGUNDOS;
 	}
@@ -92,6 +94,7 @@ public class CobroServiceImpl implements CobroService {
 		return valorHoraVehiculo * multiplicadorTiempo;
 	}
 
+	
 	public int sobreCostoMotoAltoCC(VehiculoDTO vehiculo) {
 		int sobreCosto = 0;
 		if(TipoVehiculo.MOTO.getTipo().equals(vehiculo.getTipo()) && vehiculo.getCilindraje() > 500) {

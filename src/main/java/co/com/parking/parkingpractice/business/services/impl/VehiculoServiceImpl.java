@@ -10,7 +10,6 @@ import org.springframework.stereotype.Service;
 
 import co.com.parking.parkingpractice.business.services.VehiculoService;
 import co.com.parking.parkingpractice.constantes.MensajesConstantes;
-import co.com.parking.parkingpractice.ecxceptions.ExceptionVehiculoParqueado;
 import co.com.parking.parkingpractice.ecxceptions.ExceptionSalidaNoRegistrada;
 import co.com.parking.parkingpractice.models.ConsultaParqueadosDTO;
 import co.com.parking.parkingpractice.models.VehiculoDTO;
@@ -38,13 +37,9 @@ public class VehiculoServiceImpl implements VehiculoService {
 	
 	@Override
 	@Transactional
-	public boolean validarVehiculoEstaAdentro(String placa) throws ExceptionVehiculoParqueado {
+	public boolean validarVehiculoEstaAdentro(String placa){
 		int cantidadVehiculosEnParqueo = vehiculoRepository.validarVehiculoEstaAdentro(placa);
-		boolean vehiculoAdentro = false;
-		if(cantidadVehiculosEnParqueo > 0) {
-			throw new ExceptionVehiculoParqueado(MensajesConstantes.MENSAJE_VEHICULO_YA_ESTA_EN_PARQUEO);
-		}
-		return vehiculoAdentro;
+		return cantidadVehiculosEnParqueo > 0;
 	}
 	
 	@Override

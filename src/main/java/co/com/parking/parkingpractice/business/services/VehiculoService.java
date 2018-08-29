@@ -1,7 +1,5 @@
 package co.com.parking.parkingpractice.business.services;
 
-import co.com.parking.parkingpractice.ecxceptions.ExceptionVehiculoParqueado;
-
 import java.util.List;
 
 import co.com.parking.parkingpractice.ecxceptions.ExceptionSalidaNoRegistrada;
@@ -14,7 +12,7 @@ public interface VehiculoService {
 	
 	public int contarVehiculoXTipo(String tipo);
 	
-	public boolean validarVehiculoEstaAdentro(String placa) throws ExceptionVehiculoParqueado;
+	public boolean validarVehiculoEstaAdentro(String placa);
 
 	void actualizarSalidaVehiculo(VehiculoDTO vehiculo) throws ExceptionSalidaNoRegistrada;
 

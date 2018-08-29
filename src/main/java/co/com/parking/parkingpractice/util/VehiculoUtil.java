@@ -1,19 +1,21 @@
 package co.com.parking.parkingpractice.util;
 
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
 import co.com.parking.parkingpractice.constantes.MensajesConstantes;
 import co.com.parking.parkingpractice.ecxceptions.ExecptionCampoInvalido;
 
+@Component
 public class VehiculoUtil {
 	
 	private static final String INICIAL_PLACA = "A";
 	private static final String NOMBRE_CAMPO_TIPO = "Tipo Vehiculo";
 	private static final String NOMBRE_CAMPO_PLACA = "Placa Vehiculo";
 	
-	public VehiculoUtil() {
-		super();
-	}
+	@Autowired
+	private TiempoUtil tiempoUtil;
 	
 	public TipoVehiculo tipoVehiculo(String tipo) throws ExecptionCampoInvalido{
 		
@@ -35,12 +37,11 @@ public class VehiculoUtil {
 	
 	public boolean puedeEntrarPorDigitoYDia(String placa) throws ExecptionCampoInvalido {
 
-		TiempoUtil tiempoUtil = new TiempoUtil();
 		if(StringUtils.isEmpty(placa)) {
 			throw new ExecptionCampoInvalido(MensajesConstantes.MENSAJE_PLACA_VACIA, NOMBRE_CAMPO_PLACA);
 		}
 		
-		return !placa.startsWith(INICIAL_PLACA) || tiempoUtil.esLunesDomingo();
+		return (!placa.startsWith(INICIAL_PLACA)) || tiempoUtil.esLunesDomingo();
 	}
 
 }
