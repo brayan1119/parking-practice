@@ -24,7 +24,7 @@ import co.com.parking.parkingpractice.util.VehiculoUtil;
 public class UnitTestVehiculoUtil {
 	
 	@Autowired
-	private VehiculoUtil vehiculoUtil ;
+	private VehiculoUtil vehiculoUtil;
 	
 	@MockBean
 	private TiempoUtil tiempoUtil;
