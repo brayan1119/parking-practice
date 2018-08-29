@@ -8,10 +8,11 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
+import co.com.parking.parkingpractice.models.ConsultaParqueadosDTO;
 import co.com.parking.parkingpractice.persistence.entities.VehiculoEntity;
 
 @Repository
-public interface VehiculoRepository extends JpaRepository<VehiculoEntity, Integer>{
+public interface VehiculoRepository extends JpaRepository<VehiculoEntity, String>{
 	
 	@Query(value = "SELECT count(*) "
 			+ "FROM vehiculo v "
@@ -30,8 +31,11 @@ public interface VehiculoRepository extends JpaRepository<VehiculoEntity, Intege
 	@Query("update vehiculo v set v.fechaSalida = SYSDATE where v.placa = :placa")
 	public int actualizarSalidaVehiculo(@Param("placa") String placa);
 	
-	@Query(value = "SELECT v "
+	@Query(value = "SELECT new co.com.parking.parkingpractice.models.ConsultaParqueadosDTO("
+			+ "v.placa, "
+			+ "v.tipo, "
+			+ "v.fechaIngreso) "
 			+ "FROM vehiculo v "
 			+ "WHERE v.fechaSalida is null")
-	public List<VehiculoEntity> obtenerVehiculosParqueados();
+	public List<ConsultaParqueadosDTO> obtenerVehiculosParqueados();
 }

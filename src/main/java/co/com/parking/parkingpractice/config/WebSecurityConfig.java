@@ -1,0 +1,15 @@
+package co.com.parking.parkingpractice.config;
+
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
+import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
+
+//@Configuration
+//@EnableWebMvc
+public class WebSecurityConfig implements WebMvcConfigurer {
+
+	@Override
+	public void addCorsMappings(CorsRegistry registry) {
+		registry.addMapping("*/*").allowedOrigins("*");
+	}
+ 
+}

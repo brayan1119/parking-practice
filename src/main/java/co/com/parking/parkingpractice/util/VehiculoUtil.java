@@ -34,13 +34,13 @@ public class VehiculoUtil {
 	}
 	
 	public boolean puedeEntrarPorDigitoYDia(String placa) throws ExecptionCampoInvalido {
-		
+
 		TiempoUtil tiempoUtil = new TiempoUtil();
 		if(StringUtils.isEmpty(placa)) {
 			throw new ExecptionCampoInvalido(MensajesConstantes.MENSAJE_PLACA_VACIA, NOMBRE_CAMPO_PLACA);
 		}
 		
-		return !(placa.startsWith(INICIAL_PLACA) && tiempoUtil.esLunesDomingo());
+		return !placa.startsWith(INICIAL_PLACA) || tiempoUtil.esLunesDomingo();
 	}
 
 }

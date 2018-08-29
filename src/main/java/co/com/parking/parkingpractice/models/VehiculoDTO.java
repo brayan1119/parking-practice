@@ -32,6 +32,15 @@ public class VehiculoDTO {
 		return entity;
 	}
 	
+	public VehiculoDTO(VehiculoEntity vehiculoEntity) {
+		super();
+		this.placa = vehiculoEntity.getPlaca();
+		this.tipo = vehiculoEntity.getTipo();
+		this.cilindraje = vehiculoEntity.getCilindraje();
+		this.fechaIngreso = vehiculoEntity.getFechaIngreso();
+		this.fechaSalida = vehiculoEntity.getFechaSalida();
+	}
+	
 	public String getTipo() {
 		return tipo;
 	}

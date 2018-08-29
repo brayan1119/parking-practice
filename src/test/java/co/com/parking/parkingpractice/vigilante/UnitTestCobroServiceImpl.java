@@ -24,45 +24,32 @@ public class UnitTestCobroServiceImpl {
 	
 	CobroServiceImpl  cobroService = new CobroServiceImpl();
 	
-	private static final int DIAS_MILISEGUNDOS = 86400000;
-	private static final int HORAS_MILISEGUNDOS = 3600000;
-	
+	private static final int DIAS_HORAS = 24;
+	private static final int HORAS_MINUTOS = 60;	
 	@Test
 	public void cantidadDias() throws ExcepcionGenerica, ParseException {
 		//Preparar los datos
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
 		Date fechaInicial = dateFormat.parse("2018-02-14");
-		Date fechaFinal = dateFormat.parse("2018-03-22");
+		Date fechaFinal = dateFormat.parse("2018-02-16");
 		//Assert cuando Se obtiene el objeto tipo moto
-		assertTrue(36 == cobroService.cantidadDias(fechaInicial, fechaFinal)/DIAS_MILISEGUNDOS);
+		assertTrue(48.0 == cobroService.diferenciaTiempoHoras(fechaInicial, fechaFinal));
 	}
 	
-	@Test
-	public void calcularParteEnteraParteDecimalDias() throws ExcepcionGenerica, ParseException {
-		//Preparar los datos
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
-		
-		Date fechaInicial = dateFormat.parse("2018-08-20 11:00");
-		Date fechaFinal = dateFormat.parse("2018-08-23 11:00");
-		
-		double tiempoMilisegundos = cobroService.cantidadDias(fechaInicial, fechaFinal);
-		double[] resultados = {3.0, 0.0};
-		//Assert cuando Se obtiene el objeto tipo moto
-		assertArrayEquals(resultados, cobroService.calcularParteEnteraParteDecimal(tiempoMilisegundos, DIAS_MILISEGUNDOS), 0.0);
-	}
 	
-	@Test
-	public void calcularParteEnteraParteDecimalHoras() throws ExcepcionGenerica, ParseException {
+	//@Test
+	public void calcularParteEnteraParteDecimalHoras() throws ExcepcionGenerica, ParseException, ExceptionTarifaNoEncontrada {
 		//Preparar los datos
 		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm");
 		
 		Date fechaInicial = dateFormat.parse("2018-08-23 11:00");
-		Date fechaFinal = dateFormat.parse("2018-08-23 12:00");
+		Date fechaFinal = dateFormat.parse("2018-08-23 15:30");
 		
-		double tiempoMilisegundos = cobroService.cantidadDias(fechaInicial, fechaFinal);
-		double[] resultados = {1.0, 0.0};
+		double tiempoMilisegundos = cobroService.diferenciaTiempoHoras(fechaInicial, fechaFinal);
+		double resultados = 4;
+		VehiculoDTO vehiculo = new VehiculoDTO();
 		//Assert cuando Se obtiene el objeto tipo moto
-		assertArrayEquals(resultados, cobroService.calcularParteEnteraParteDecimal(tiempoMilisegundos, HORAS_MILISEGUNDOS), 0.0);
+		assertTrue(resultados == cobroService.calcularHorasParaCobrar(tiempoMilisegundos, vehiculo));
 	}
 	
 	//@Test
