@@ -33,7 +33,7 @@ public class IntegrationTestVigilante {
     private VehiculoService service;
 	
     // Prueba para realizar una insercion de un vehiculo 
-	@Test
+	//@Test
 	public void TestInsert() throws Exception {
 
 		// Inicializando los objetos para la prueba

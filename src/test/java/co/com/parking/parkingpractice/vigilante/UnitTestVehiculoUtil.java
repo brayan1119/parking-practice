@@ -44,7 +44,7 @@ public class UnitTestVehiculoUtil {
 		assertEquals(TipoVehiculo.CARRO.getTipo(), vehiculoUtil.tipoVehiculo("AA").getTipo());
 	}
 	
-	@Test
+	//@Test
 	public void puedeEntrarPorDigitoYDia() throws ExecptionCampoInvalido {
 		
 		//Preparando Los datos
