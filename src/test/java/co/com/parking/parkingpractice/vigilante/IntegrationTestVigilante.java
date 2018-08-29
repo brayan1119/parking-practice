@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.autoconfigure.web.servlet.WebMvcTest;
 import org.springframework.boot.test.mock.mockito.MockBean;
 import org.springframework.http.MediaType;
+import org.springframework.test.annotation.Rollback;
 import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 import org.springframework.test.web.servlet.MockMvc;
 
@@ -16,6 +17,7 @@ import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.
 import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 import co.com.parking.parkingpractice.business.services.VehiculoService;
+import co.com.parking.parkingpractice.business.services.VigilanteService;
 import co.com.parking.parkingpractice.controllers.VigilanteController;
 import co.com.parking.parkingpractice.models.VehiculoDTO;
 
@@ -31,16 +33,20 @@ public class IntegrationTestVigilante {
     
     @MockBean
     private VehiculoService service;
+    
+    @MockBean
+    private VigilanteService vigilanteService;
 	
     // Prueba para realizar una insercion de un vehiculo 
-	//@Test
+	@Test
+	@Rollback
 	public void TestInsert() throws Exception {
 
 		// Inicializando los objetos para la prueba
 		String json = mapper.writeValueAsString(new VehiculoDTO("AGJ93D", "M"));
 		//Realizando la prueba
 
-		this.mockMvc.perform(post("/api/Ingresar")
+		this.mockMvc.perform(post("/api/ingresar")
 			       .contentType(MediaType.APPLICATION_JSON)
 			       .content(json)
 			       .accept(MediaType.APPLICATION_JSON))
