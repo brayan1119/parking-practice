@@ -29,4 +29,8 @@ public class TipoVehiculoEntity {
 	public String getNombre() {
 		return nombre;
 	}
+	
+	public String getTipo() {
+		return tipo;
+	}
 }
