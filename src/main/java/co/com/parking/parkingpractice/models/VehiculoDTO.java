@@ -30,7 +30,7 @@ public class VehiculoDTO {
 	}
 	
 	public String getTipo() {
-		return tipo;
+		return this.tipo;
 	}
 
 	public void setTipo(String tipo) {
@@ -38,7 +38,7 @@ public class VehiculoDTO {
 	}
 
 	public String getPlaca() {
-		return placa;
+		return this.placa;
 	}
 	
 	public void setPlaca(String placa) {
@@ -46,7 +46,7 @@ public class VehiculoDTO {
 	}
 
 	public Date getFechaIngreso() {
-		return fechaIngreso;
+		return this.fechaIngreso;
 	}
 
 	public void setFechaIngreso(Date fechaIngreso) {
@@ -54,7 +54,7 @@ public class VehiculoDTO {
 	}
 
 	public Date getFechaSalida() {
-		return fechaSalida;
+		return this.fechaSalida;
 	}
 
 	public void setFechaSalida(Date fechaSalida) {
@@ -62,7 +62,7 @@ public class VehiculoDTO {
 	}
 
 	public int getCilindraje() {
-		return cilindraje;
+		return this.cilindraje;
 	}
 
 	public void setCilindraje(int cilindraje) {
