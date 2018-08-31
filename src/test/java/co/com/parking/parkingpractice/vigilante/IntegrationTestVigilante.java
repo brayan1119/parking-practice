@@ -68,11 +68,11 @@ public class IntegrationTestVigilante {
 		VehiculoDTO vehiculoDTO = new VehiculoDTO("SXZ66E", "M");
 		
 		restTemplate.postForEntity("/api/ingresar", vehiculoDTO, String.class);
-		ResponseEntity<SalidaVehiculoDTO> responseEntity1 =
+		ResponseEntity<SalidaVehiculoDTO> responseEntity =
 	            restTemplate.postForEntity("/api/salir", vehiculoDTO, SalidaVehiculoDTO.class);
 		
-		assertEquals(HttpStatus.OK, responseEntity1.getStatusCode());
-		assertEquals(vehiculoDTO.getPlaca(), responseEntity1.getBody().getPlaca());
+		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+		assertEquals(vehiculoDTO.getPlaca(), responseEntity.getBody().getPlaca());
 		
 	}
 	

@@ -16,7 +16,8 @@ import co.com.parking.parkingpractice.ecxceptions.ExecptionNoPuedeIngresarProres
 import co.com.parking.parkingpractice.ecxceptions.ExecptionVehiculoNoPaqueado;
 import co.com.parking.parkingpractice.models.SalidaVehiculoDTO;
 import co.com.parking.parkingpractice.models.VehiculoDTO;
-import co.com.parking.parkingpractice.util.VehiculoUtil;
+import co.com.parking.parkingpractice.auxiliar.VigilanteAuxiliar;
+import co.com.parking.parkingpractice.business.services.TipoVehiculoService;
 
 @Service
 public class VigilanteServiceImpl implements VigilanteService {
@@ -28,15 +29,18 @@ public class VigilanteServiceImpl implements VigilanteService {
 	private CobroService cobroService;
 	
 	@Autowired
-	private VehiculoUtil vehiculoUtil;
+	private VigilanteAuxiliar vigilanteAuxiliar;
+	
+	@Autowired
+	private TipoVehiculoService tipoVehiculoService;
 	
 	@Override
 	public void ingresaVehiculo(VehiculoDTO vehiculo) throws ExcepcionGenerica {
 		
 		
 		int numVehiculo = vehiculoService.contarVehiculoXTipo(vehiculo.getTipo());
-		boolean hayEspacioVehiculo = numVehiculo <= vehiculoUtil.tipoVehiculo(vehiculo.getTipo()).getTope();
-		boolean puedeEntrarPorDigitoYDia = vehiculoUtil.puedeEntrarPorDigitoYDia(vehiculo.getPlaca());
+		boolean hayEspacioVehiculo = numVehiculo < tipoVehiculoService.capacidadPorTipo(vehiculo.getTipo());
+		boolean puedeEntrarPorDigitoYDia = vigilanteAuxiliar.puedeEntrarPorDigitoYDia(vehiculo.getPlaca());
 		validarVehiculoAdentro(vehiculo.getPlaca());
 		if (hayEspacioVehiculo && puedeEntrarPorDigitoYDia) {
 			vehiculo.setFechaIngreso(new Date());

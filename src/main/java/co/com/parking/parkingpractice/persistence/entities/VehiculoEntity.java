@@ -4,7 +4,10 @@ import java.util.Date;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
 
@@ -15,9 +18,9 @@ public class VehiculoEntity {
     @Column(name = "placa", nullable = false, unique = true)
     private String placa;
     
-    // Tipo de vehiculo M para moto C para carro
-    @Column(name = "tipo", nullable = false)
-    private String tipo;
+	@ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "tipo")
+    private TipoVehiculoEntity tipo;
     
     @Column(name = "cilindraje", nullable = false)
     private int cilindraje;
@@ -38,11 +41,11 @@ public class VehiculoEntity {
 		this.placa = placa;
 	}
 
-	public String getTipo() {
+	public TipoVehiculoEntity getTipo() {
 		return tipo;
 	}
 
-	public void setTipo(String tipo) {
+	public void setTipo(TipoVehiculoEntity tipo) {
 		this.tipo = tipo;
 	}
 

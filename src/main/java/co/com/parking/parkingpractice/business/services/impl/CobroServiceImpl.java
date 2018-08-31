@@ -7,9 +7,9 @@ import org.springframework.stereotype.Service;
 
 import co.com.parking.parkingpractice.business.services.CobroService;
 import co.com.parking.parkingpractice.models.VehiculoDTO;
-import co.com.parking.parkingpractice.util.TipoVehiculo;
 import co.com.parking.parkingpractice.business.services.TarifasService;
 import co.com.parking.parkingpractice.constantes.TarifasConstantes;
+import co.com.parking.parkingpractice.constantes.TipoVehiculoConstantes;
 import co.com.parking.parkingpractice.ecxceptions.ExceptionTarifaNoEncontrada;
 
 @Service
@@ -38,7 +38,6 @@ public class CobroServiceImpl implements CobroService {
 		} else {
 			cobro +=calcularHorasParaCobrar(horasConMinutos, vehiculo);
 		}
-		
 
 		// Valor adicional por moto mayor a 500cc
 		cobro += sobreCostoMotoAltoCC(vehiculo);
@@ -70,7 +69,7 @@ public class CobroServiceImpl implements CobroService {
 	
 	public int calcularCobroPorDia(VehiculoDTO vehiculo, int diasCompletos) throws ExceptionTarifaNoEncontrada {
 		Integer idTarifa;
-		if(TipoVehiculo.MOTO.getTipo().equals(vehiculo.getTipo())) {
+		if(TipoVehiculoConstantes.MOTO.equals(vehiculo.getTipo())) {
 			idTarifa = TarifasConstantes.DIA_MOTO;
 		}else {
 			idTarifa = TarifasConstantes.DIA_CARO;
@@ -80,7 +79,7 @@ public class CobroServiceImpl implements CobroService {
 	
 	public int calcularCobroPorHora(VehiculoDTO vehiculo, int horasCompletos) throws ExceptionTarifaNoEncontrada {
 		Integer idTarifa;
-		if(TipoVehiculo.MOTO.getTipo().equals(vehiculo.getTipo())) {
+		if(TipoVehiculoConstantes.MOTO.equals(vehiculo.getTipo())) {
 			idTarifa = TarifasConstantes.HORA_MOTO;
 		}else {
 			idTarifa = TarifasConstantes.HORA_CARO;
@@ -97,8 +96,8 @@ public class CobroServiceImpl implements CobroService {
 	
 	public int sobreCostoMotoAltoCC(VehiculoDTO vehiculo) {
 		int sobreCosto = 0;
-		if(TipoVehiculo.MOTO.getTipo().equals(vehiculo.getTipo()) && vehiculo.getCilindraje() > 500) {
-			sobreCosto = SOBRE_COSTO_MOTO_500CC; 
+		if(TipoVehiculoConstantes.MOTO.equals(vehiculo.getTipo()) && vehiculo.getCilindraje() > 500) {
+			sobreCosto = SOBRE_COSTO_MOTO_500CC;
 		}
 		return sobreCosto;
 	}

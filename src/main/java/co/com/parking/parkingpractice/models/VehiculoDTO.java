@@ -2,8 +2,6 @@ package co.com.parking.parkingpractice.models;
 
 import java.util.Date;
 
-import co.com.parking.parkingpractice.persistence.entities.VehiculoEntity;
-
 public class VehiculoDTO {
 	
     private String placa;
@@ -21,24 +19,14 @@ public class VehiculoDTO {
 		this.tipo = tipo;
 		this.placa = placa;
 	}
-
-	public VehiculoEntity convertVehiculoToEntity() {
-		VehiculoEntity entity = new VehiculoEntity();
-		entity.setTipo(this.getTipo());
-		entity.setPlaca(this.getPlaca());
-		entity.setFechaIngreso(this.getFechaIngreso());
-		entity.setFechaSalida(this.getFechaSalida());
-		entity.setCilindraje(this.getCilindraje());
-		return entity;
-	}
 	
-	public VehiculoDTO(VehiculoEntity vehiculoEntity) {
+	public VehiculoDTO(String placa, String tipo, int cilindraje, Date fechaIngreso, Date fechaSalida) {
 		super();
-		this.placa = vehiculoEntity.getPlaca();
-		this.tipo = vehiculoEntity.getTipo();
-		this.cilindraje = vehiculoEntity.getCilindraje();
-		this.fechaIngreso = vehiculoEntity.getFechaIngreso();
-		this.fechaSalida = vehiculoEntity.getFechaSalida();
+		this.placa = placa;
+		this.tipo = tipo;
+		this.cilindraje = cilindraje;
+		this.fechaIngreso = fechaIngreso;
+		this.fechaSalida = fechaSalida;
 	}
 	
 	public String getTipo() {

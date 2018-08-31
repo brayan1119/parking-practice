@@ -33,7 +33,7 @@ public interface VehiculoRepository extends JpaRepository<VehiculoEntity, String
 	
 	@Query(value = "SELECT new co.com.parking.parkingpractice.models.ConsultaParqueadosDTO("
 			+ "v.placa, "
-			+ "v.tipo, "
+			+ "v.tipo.nombre, "
 			+ "v.fechaIngreso) "
 			+ "FROM vehiculo v "
 			+ "WHERE v.fechaSalida is null")

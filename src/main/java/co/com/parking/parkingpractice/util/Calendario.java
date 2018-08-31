@@ -5,11 +5,7 @@ import java.util.Calendar;
 import org.springframework.stereotype.Component;
 
 @Component
-public class TiempoUtil {
-	
-	public TiempoUtil() {
-		super();
-	}
+public class Calendario {
 	
 	public boolean esLunesDomingo() {
 		
@@ -24,4 +20,6 @@ public class TiempoUtil {
 	public int getDateToday() {
 		return getDateInstant().get(Calendar.DAY_OF_WEEK);
 	}
+
+
 }

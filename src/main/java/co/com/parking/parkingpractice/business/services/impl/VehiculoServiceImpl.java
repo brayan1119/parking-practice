@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import co.com.parking.parkingpractice.business.services.VehiculoService;
 import co.com.parking.parkingpractice.constantes.MensajesConstantes;
 import co.com.parking.parkingpractice.ecxceptions.ExceptionSalidaNoRegistrada;
+import co.com.parking.parkingpractice.factories.VehiculoFactory;
 import co.com.parking.parkingpractice.models.ConsultaParqueadosDTO;
 import co.com.parking.parkingpractice.models.VehiculoDTO;
 import co.com.parking.parkingpractice.persistence.entities.VehiculoEntity;
@@ -22,11 +23,14 @@ public class VehiculoServiceImpl implements VehiculoService {
 	@Autowired
 	private VehiculoRepository vehiculoRepository;
 	
+	@Autowired
+	private VehiculoFactory vehiculoFactory;
+	
 	@Override
 	@Transactional
 	public void insertarVehivculo(VehiculoDTO vehiculo) {
 		vehiculo.setFechaSalida(null);
-		vehiculoRepository.save(vehiculo.convertVehiculoToEntity());
+		vehiculoRepository.save(vehiculoFactory.convertVehiculoToEntity(vehiculo));
 	}
 	
 	@Override
@@ -62,6 +66,7 @@ public class VehiculoServiceImpl implements VehiculoService {
 	public VehiculoDTO obtenerVehiculoXPlaca(String placa) {
 		Optional<VehiculoEntity> vehiculo = vehiculoRepository.findById(placa);
 		
-		return vehiculo.map(VehiculoDTO :: new ).orElse(null);
+		return vehiculo.map(vehiculoEntity -> vehiculoFactory.convertEntityToVehiculoDTO(vehiculoEntity) ).orElse(null);
 	}
+	
 }

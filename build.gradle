@@ -10,6 +10,18 @@ buildscript {
 	}
 }
 
+plugins {
+  id "cz.swsamuraj.jaxws" version "0.6.1"
+}
+
+jaxws {
+    wsdlDir = 'src/main/resources/WSDLSuperfinanciera'
+    wsdlLocationDefault = false
+    generatedSources = 'src/main/java'
+    packageName = 'co.com.parking.parkingpractice.superintendencia'
+    extension = true
+}
+
 apply plugin: 'java'
 apply plugin: 'eclipse'
 apply plugin: 'org.springframework.boot'
@@ -30,10 +42,7 @@ dependencies {
 	compile('org.springframework.boot:spring-boot-starter-data-jpa')
 	compile('org.springframework.boot:spring-boot-starter-web')
 	compile('com.h2database:h2')
+	
 	testCompile('org.springframework.boot:spring-boot-starter-test')
-	/*testCompile group: 'org.powermock', name: 'powermock-api-mockito', version: '1.7.4'
-	/*testCompile group: 'org.powermock', name: 'powermock-module-junit4', version: '1.7.4'
-	/*testCompile group: 'org.mockito', name: 'mockito-core', version: '1.10.19'
-	testCompile group: 'org.mockito', name: 'mockito-all', version: '1.10.19'*/
 	
 }
