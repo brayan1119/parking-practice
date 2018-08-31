@@ -77,6 +77,19 @@ public class IntegrationTestVigilante {
 	}
 	
 	@Test
+	public void TestSalirError() throws Exception {
+
+		// Inicializando los objetos para la prueba
+		VehiculoDTO vehiculoDTO = new VehiculoDTO("QXZ66E", "M");
+		
+		ResponseEntity<SalidaVehiculoDTO> responseEntity =
+	            restTemplate.postForEntity("/api/salir", vehiculoDTO, SalidaVehiculoDTO.class);
+		
+		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
+		
+	}
+	
+	@Test
 	public void TestSalirDias() throws Exception {
 
 		// Inicializando los objetos para la prueba
