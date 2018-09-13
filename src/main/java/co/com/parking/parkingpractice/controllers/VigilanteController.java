@@ -24,7 +24,7 @@ public class VigilanteController {
 	
     @RequestMapping(value = "/ingresar", method = RequestMethod.POST)
     public void ingresarVehiculo(@RequestBody VehiculoDTO vehiculoDTO) throws ExcepcionGenerica {
-    	vigilanteService.ingresaVehiculo(vehiculoDTO);
+    	vigilanteService.ingresarVehiculo(vehiculoDTO);
     }
 
     @RequestMapping(value = "/salir", method = RequestMethod.POST)

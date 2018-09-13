@@ -1,4 +1,4 @@
-package co.com.parking.parkingpractice.vigilante;
+package co.com.parking.parkingpractice.auxiliar;
 
 import static org.junit.Assert.assertFalse;
 import static org.junit.Assert.assertTrue;
@@ -19,7 +19,7 @@ import co.com.parking.parkingpractice.util.Calendario;
 @RunWith(SpringJUnit4ClassRunner.class)
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UnitTestVehiculoUtil {
+public class UnitTestVigilanteAuxiliar {
 	
 	@Autowired
 	private VigilanteAuxiliar vigilanteAuxiliar;
@@ -45,7 +45,7 @@ public class UnitTestVehiculoUtil {
 	
 	@Test(expected = ExecptionCampoInvalido.class)
 	public void errorPuedeEntrarPorDigitoYDiaNull() throws ExecptionCampoInvalido {
-		//Assert cuando Se obtiene el objeto tipo moto
+		//Assert cuando no se obtiene el objeto tipo moto
 		vigilanteAuxiliar.puedeEntrarPorDigitoYDia(null);
 	}
 	

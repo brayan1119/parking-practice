@@ -22,7 +22,7 @@ public class VehiculoContorller {
 	private VehiculoService vehiculoService;
 	
     @RequestMapping(value = "/consultar-vehiculos-parqueados", method = RequestMethod.GET)
-    public ResponseEntity<List<ConsultaParqueadosDTO>> consultaVehiculos() {
+    public ResponseEntity<List<ConsultaParqueadosDTO>> consultaVehiculosParqueados() {
         return new ResponseEntity<>(vehiculoService.obtenerVehiculosParqueados(), HttpStatus.OK);
     }
 }

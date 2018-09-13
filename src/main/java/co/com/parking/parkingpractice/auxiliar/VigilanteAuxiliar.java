@@ -4,7 +4,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 import org.springframework.util.StringUtils;
 
-import co.com.parking.parkingpractice.constantes.CamporConstantes;
+import co.com.parking.parkingpractice.constantes.CamposConstantes;
 import co.com.parking.parkingpractice.constantes.MensajesConstantes;
 import co.com.parking.parkingpractice.ecxceptions.ExecptionCampoInvalido;
 import co.com.parking.parkingpractice.util.Calendario;
@@ -18,10 +18,10 @@ public class VigilanteAuxiliar {
 	public boolean puedeEntrarPorDigitoYDia(String placa) throws ExecptionCampoInvalido {
 
 		if(StringUtils.isEmpty(placa)) {
-			throw new ExecptionCampoInvalido(MensajesConstantes.MENSAJE_PLACA_VACIA, CamporConstantes.NOMBRE_CAMPO_PLACA);
+			throw new ExecptionCampoInvalido(MensajesConstantes.MENSAJE_PLACA_VACIA, CamposConstantes.NOMBRE_CAMPO_PLACA);
 		}
 		
-		return (!placa.startsWith(CamporConstantes.INICIAL_PLACA)) || calendario.esLunesDomingo();
+		return (!placa.startsWith(CamposConstantes.INICIAL_PLACA)) || calendario.esLunesDomingo();
 	}
 	
 }

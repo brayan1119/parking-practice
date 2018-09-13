@@ -10,7 +10,7 @@ buildscript {
 	}
 }
 
-plugins {
+/*plugins {
   id "cz.swsamuraj.jaxws" version "0.6.1"
 }
 
@@ -20,7 +20,7 @@ jaxws {
     generatedSources = 'src/main/java'
     packageName = 'co.com.parking.parkingpractice.superintendencia'
     extension = true
-}
+}*/
 
 apply plugin: 'java'
 apply plugin: 'eclipse'

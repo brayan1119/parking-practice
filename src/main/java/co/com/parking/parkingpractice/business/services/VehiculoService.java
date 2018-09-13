@@ -8,16 +8,16 @@ import co.com.parking.parkingpractice.models.VehiculoDTO;
 
 public interface VehiculoService {
 	
-	public void insertarVehivculo(VehiculoDTO vehiculo);
+	public void ingresarVehiculo(VehiculoDTO vehiculo);
 	
 	public int contarVehiculoXTipo(String tipo);
 	
 	public boolean validarVehiculoEstaAdentro(String placa);
 
-	void actualizarSalidaVehiculo(VehiculoDTO vehiculo) throws ExceptionSalidaNoRegistrada;
+	public void actualizarSalidaVehiculo(VehiculoDTO vehiculo) throws ExceptionSalidaNoRegistrada;
 
-	List<ConsultaParqueadosDTO> obtenerVehiculosParqueados();
+	public List<ConsultaParqueadosDTO> obtenerVehiculosParqueados();
 
-	VehiculoDTO obtenerVehiculoXPlaca(String placa);
+	public VehiculoDTO obtenerVehiculoXPlaca(String placa);
 
 }

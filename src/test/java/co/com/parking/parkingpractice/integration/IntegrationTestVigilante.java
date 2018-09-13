@@ -1,4 +1,4 @@
-package co.com.parking.parkingpractice.vigilante;
+package co.com.parking.parkingpractice.integration;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
@@ -10,7 +10,10 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertTrue;
 
+import co.com.parking.parkingpractice.ecxceptions.ExceptionSalidaNoRegistrada;
+import co.com.parking.parkingpractice.ecxceptions.ExceptionVehiculoParqueado;
 import co.com.parking.parkingpractice.models.SalidaVehiculoDTO;
 import co.com.parking.parkingpractice.models.VehiculoDTO;
 
@@ -53,12 +56,12 @@ public class IntegrationTestVigilante {
 
 		// Inicializando los objetos para la prueba
 		
-		ResponseEntity<String> responseEntity =
-	            restTemplate.postForEntity("/api/ingresar", new VehiculoDTO("KXZ66E", "M"), String.class);
-		responseEntity =
-	            restTemplate.postForEntity("/api/ingresar", new VehiculoDTO("KXZ66E", "M"), String.class);
+	    restTemplate.postForEntity("/api/ingresar", new VehiculoDTO("KXZ66E", "M"), String.class);
+		ResponseEntity<ExceptionVehiculoParqueado> responseEntity =
+	            restTemplate.postForEntity("/api/ingresar", new VehiculoDTO("KXZ66E", "M"), ExceptionVehiculoParqueado.class);
 		
-		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
+		assertEquals(HttpStatus.CONFLICT, responseEntity.getStatusCode());
+		assertTrue(ExceptionVehiculoParqueado.class == responseEntity.getBody().getClass());
 	}
 	
 	@Test
@@ -76,16 +79,17 @@ public class IntegrationTestVigilante {
 		
 	}
 	
-	@Test
+	@Test()
 	public void TestSalirError() throws Exception {
 
 		// Inicializando los objetos para la prueba
 		VehiculoDTO vehiculoDTO = new VehiculoDTO("QXZ66E", "M");
 		
-		ResponseEntity<SalidaVehiculoDTO> responseEntity =
-	            restTemplate.postForEntity("/api/salir", vehiculoDTO, SalidaVehiculoDTO.class);
-		
-		assertEquals(HttpStatus.INTERNAL_SERVER_ERROR, responseEntity.getStatusCode());
+		ResponseEntity<ExceptionSalidaNoRegistrada> responseEntity =
+	            restTemplate.postForEntity("/api/salir", vehiculoDTO, ExceptionSalidaNoRegistrada.class);
+		// Error vehiculo no parquedo
+		assertEquals(HttpStatus.CONFLICT, responseEntity.getStatusCode());
+		assertTrue(ExceptionSalidaNoRegistrada.class == responseEntity.getBody().getClass());
 		
 	}
 	
