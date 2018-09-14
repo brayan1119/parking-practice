@@ -29,35 +29,5 @@ public class CustomExceptionHandler extends ResponseEntityExceptionHandler{
 	  public final ResponseEntity<ExcepcionGenerica> handleSalidaNoRegistrada(ExcepcionGenerica ex) {
 	    return new ResponseEntity<>(ex, HttpStatus.CONFLICT);
 	  }
-	  
-	  /*@ExceptionHandler(ExceptionTarifaNoEncontrada.class)
-	  public final ResponseEntity<ExceptionTarifaNoEncontrada> handleExceptionTarifaNoEncontrada(ExceptionTarifaNoEncontrada ex) {
-	    return new ResponseEntity<>(ex, HttpStatus.CONFLICT);
-	  }
-	  
-	  @ExceptionHandler(ExceptionVehiculoParqueado.class)
-	  public final ResponseEntity<ExceptionVehiculoParqueado> handleExceptionVehiculoParqueado(ExceptionVehiculoParqueado ex) {
-	    return new ResponseEntity<>(ex, HttpStatus.CONFLICT);
-	  }
-	  
-	  @ExceptionHandler(ExecptionCampoInvalido.class)
-	  public final ResponseEntity<ExecptionCampoInvalido> handleExecptionCampoInvalido(ExecptionCampoInvalido ex) {
-	    return new ResponseEntity<>(ex, HttpStatus.CONFLICT);
-	  }
-	  
-	  @ExceptionHandler(ExecptionNoHayEspacioTipoVehiculo.class)
-	  public final ResponseEntity<ExecptionNoHayEspacioTipoVehiculo> handleExecptionNoHayEspacioTipoVehiculo(ExecptionNoHayEspacioTipoVehiculo ex) {
-	    return new ResponseEntity<>(ex, HttpStatus.CONFLICT);
-	  }
-	  
-	  @ExceptionHandler(ExecptionNoPuedeIngresarProresticcionPlacaDia.class)
-	  public final ResponseEntity<ExecptionNoPuedeIngresarProresticcionPlacaDia> handleExecptionNoPuedeIngresarProresticcionPlacaDia(ExecptionNoPuedeIngresarProresticcionPlacaDia ex) {
-	    return new ResponseEntity<>(ex, HttpStatus.CONFLICT);
-	  }
-	  
-	  @ExceptionHandler(ExecptionVehiculoNoPaqueado.class)
-	  public final ResponseEntity<ExecptionVehiculoNoPaqueado> handleExecptionVehiculoNoPaqueado(ExecptionVehiculoNoPaqueado ex) {
-	    return new ResponseEntity<>(ex, HttpStatus.CONFLICT);
-	  }*/
 
 }

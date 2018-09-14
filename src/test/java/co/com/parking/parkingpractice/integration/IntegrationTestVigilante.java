@@ -24,20 +24,6 @@ public class IntegrationTestVigilante {
 
     @Autowired
     private TestRestTemplate restTemplate;
-    
-    /*@Before
-    public void setUp() {
-    	VehiculoDTO vehiculoDTO = new VehiculoDTO("LGG93D", "M");
-    	vehiculoDTO.setFechaIngreso(new Date());
-    	service.insertarVehivculo(vehiculoDTO);
-    }
-    
-    @After
-    public void Restart() throws ExceptionSalidaNoRegistrada {
-    	VehiculoDTO vehiculoDTO = new VehiculoDTO("LGG93D", "M");
-    	vehiculoDTO.setFechaIngreso(new Date());
-    	service.actualizarSalidaVehiculo(vehiculoDTO);
-    }*/
 	
     // Prueba para realizar una insercion de un vehiculo 
 	@Test

@@ -9,8 +9,4 @@ public interface CobroService {
 
 	public int calcularHorasParaCobrar(double horas, VehiculoDTO vehiculo) throws ExceptionTarifaNoEncontrada;
 
-	/*
-	 * Este metodo no debe de pertenecer a la interfaz pues no tiene que ver con su desripcion
-	 */
-	//public double diferenciaTiempoHoras(Date fechaInicio, Date fechaFin);
 }
