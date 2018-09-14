@@ -7,10 +7,14 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
 import static org.junit.Assert.assertTrue;
+
+import org.junit.After;
+import org.junit.Before;
 
 import co.com.parking.parkingpractice.ecxceptions.ExceptionSalidaNoRegistrada;
 import co.com.parking.parkingpractice.ecxceptions.ExceptionVehiculoParqueado;
@@ -24,7 +28,19 @@ public class IntegrationTestVigilante {
 
     @Autowired
     private TestRestTemplate restTemplate;
+    
+    @Before
+    @Sql({"/data-test-before.sql"})
+    public void setUp() {
+        // Insert datos
+    }
 	
+    @After
+    @Sql({"/data-test-after.sql"})
+    public void Restart() {
+        // Eliminar datos
+    }
+    
     // Prueba para realizar una insercion de un vehiculo 
 	@Test
 	public void TestInsert() throws Exception {
