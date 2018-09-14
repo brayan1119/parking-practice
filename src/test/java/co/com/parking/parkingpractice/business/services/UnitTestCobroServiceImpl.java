@@ -1,7 +1,6 @@
-package co.com.parking.parkingpractice.vigilante;
+package co.com.parking.parkingpractice.business.services;
 
 import static org.junit.Assert.assertEquals;
-import static org.junit.Assert.assertTrue;
 import static org.mockito.Mockito.when;
 
 import java.text.ParseException;
@@ -18,7 +17,6 @@ import org.springframework.test.context.junit4.SpringJUnit4ClassRunner;
 
 import co.com.parking.parkingpractice.business.services.CobroService;
 import co.com.parking.parkingpractice.business.services.TarifasService;
-import co.com.parking.parkingpractice.ecxceptions.ExcepcionGenerica;
 import co.com.parking.parkingpractice.ecxceptions.ExceptionTarifaNoEncontrada;
 import co.com.parking.parkingpractice.models.VehiculoDTO;
 
@@ -32,16 +30,6 @@ public class UnitTestCobroServiceImpl {
 	
 	@MockBean
 	private TarifasService tarifasService;
-	
-	@Test
-	public void cantidadDias() throws ExcepcionGenerica, ParseException {
-		//Preparar los datos
-		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
-		Date fechaInicial = dateFormat.parse("2018-02-14");
-		Date fechaFinal = dateFormat.parse("2018-02-16");
-		//Assert cuando Se obtiene el objeto tipo moto
-		assertTrue(48.0 == cobroService.diferenciaTiempoHoras(fechaInicial, fechaFinal));
-	}
 	
 	@Test
 	public void calcularCobroMotoHora() throws ParseException, ExceptionTarifaNoEncontrada {

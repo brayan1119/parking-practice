@@ -1,4 +1,4 @@
-package co.com.parking.parkingpractice.vigilante;
+package co.com.parking.parkingpractice.business.services;
 
 import static org.mockito.Mockito.when;
 
@@ -39,7 +39,7 @@ public class UnitTestVigilanteServiceImpl {
 		when(tipoVehiculoService.capacidadPorTipo("M")).thenReturn(0);
 		
 		//Assert cuando Se obtiene el objeto tipo moto
-		vigilanteService.ingresaVehiculo(new VehiculoDTO("LGJ93D", "M"));
+		vigilanteService.ingresarVehiculo(new VehiculoDTO("LGJ93D", "M"));
 	}
 	
 	@Test(expected = ExecptionNoPuedeIngresarProresticcionPlacaDia.class)
@@ -50,6 +50,6 @@ public class UnitTestVigilanteServiceImpl {
 		when(calendario.esLunesDomingo()).thenReturn(false);
 		
 		//Assert cuando Se obtiene el objeto tipo moto
-		vigilanteService.ingresaVehiculo(new VehiculoDTO("AQJ93D", "M"));
+		vigilanteService.ingresarVehiculo(new VehiculoDTO("AQJ93D", "M"));
 	}
 }

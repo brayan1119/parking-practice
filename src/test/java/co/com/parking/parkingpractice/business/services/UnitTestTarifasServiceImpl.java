@@ -1,4 +1,4 @@
-package co.com.parking.parkingpractice.vigilante;
+package co.com.parking.parkingpractice.business.services;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;

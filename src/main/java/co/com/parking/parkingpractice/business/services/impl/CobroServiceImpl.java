@@ -1,12 +1,11 @@
 package co.com.parking.parkingpractice.business.services.impl;
 
-import java.util.Date;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import co.com.parking.parkingpractice.business.services.CobroService;
 import co.com.parking.parkingpractice.models.VehiculoDTO;
+import co.com.parking.parkingpractice.util.Calendario;
 import co.com.parking.parkingpractice.business.services.TarifasService;
 import co.com.parking.parkingpractice.constantes.TarifasConstantes;
 import co.com.parking.parkingpractice.constantes.TipoVehiculoConstantes;
@@ -18,15 +17,17 @@ public class CobroServiceImpl implements CobroService {
 	@Autowired
 	private TarifasService tarifasService;
 	
+	@Autowired
+	private Calendario calendario;
+	
 	private static final int DIAS_HORAS = 24;
 	private static final int HORAS_TOPE_COBRO_DIA = 9;
-	private static final int HORAS_MILISEGUNDOS = 3600000;
 	private static final int SOBRE_COSTO_MOTO_500CC = 2000;
 	
 	public int calcularCobroVehiculo(VehiculoDTO vehiculo) throws ExceptionTarifaNoEncontrada {
 		int cobro = 0;
 		
-		double horasConMinutos = diferenciaTiempoHoras(vehiculo.getFechaIngreso(), vehiculo.getFechaSalida());
+		double horasConMinutos = calendario.diferenciaTiempoHoras(vehiculo.getFechaIngreso(), vehiculo.getFechaSalida());
 		if(horasConMinutos > DIAS_HORAS) {
 			int numeroDias = calcularDias(horasConMinutos);
 			cobro += calcularCobroPorDia(vehiculo, numeroDias);
@@ -56,12 +57,6 @@ public class CobroServiceImpl implements CobroService {
 		}
 		return cobro;
 	}
-	
-	@Override
-	public double diferenciaTiempoHoras(Date fechaInicio, Date fechaFin) {
-		return (double)(fechaFin.getTime() - fechaInicio.getTime()) / HORAS_MILISEGUNDOS;
-	}
-	
 	
 	public int calcularDias(double horas) {
 		return (int)(horas / DIAS_HORAS);

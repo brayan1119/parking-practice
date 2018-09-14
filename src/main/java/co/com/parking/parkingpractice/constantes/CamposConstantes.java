@@ -1,8 +1,8 @@
 package co.com.parking.parkingpractice.constantes;
 
-public final class CamporConstantes {
+public final class CamposConstantes {
 	
-	private CamporConstantes() {
+	private CamposConstantes() {
 		super();
 	}
 	

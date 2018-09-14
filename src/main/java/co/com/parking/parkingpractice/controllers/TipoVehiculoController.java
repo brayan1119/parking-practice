@@ -22,7 +22,7 @@ public class TipoVehiculoController {
 	private TipoVehiculoService tipoVehiculoService;
 	
     @RequestMapping(value = "/obtener-tipos", method = RequestMethod.GET)
-    public ResponseEntity<List<TipoVehiculoDTO>> consultaVehiculos() {
+    public ResponseEntity<List<TipoVehiculoDTO>> consultaTipoVehiculos() {
         return new ResponseEntity<>(tipoVehiculoService.obtenerTiposVehiculos(), HttpStatus.OK);
     }
 

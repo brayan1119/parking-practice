@@ -28,7 +28,7 @@ public class VehiculoServiceImpl implements VehiculoService {
 	
 	@Override
 	@Transactional
-	public void insertarVehivculo(VehiculoDTO vehiculo) {
+	public void ingresarVehiculo(VehiculoDTO vehiculo) {
 		vehiculo.setFechaSalida(null);
 		vehiculoRepository.save(vehiculoFactory.convertVehiculoToEntity(vehiculo));
 	}
@@ -42,8 +42,7 @@ public class VehiculoServiceImpl implements VehiculoService {
 	@Override
 	@Transactional
 	public boolean validarVehiculoEstaAdentro(String placa){
-		int cantidadVehiculosEnParqueo = vehiculoRepository.validarVehiculoEstaAdentro(placa);
-		return cantidadVehiculosEnParqueo > 0;
+		return vehiculoRepository.validarVehiculoEstaAdentro(placa) > 0;
 	}
 	
 	@Override

@@ -35,8 +35,7 @@ public class VigilanteServiceImpl implements VigilanteService {
 	private TipoVehiculoService tipoVehiculoService;
 	
 	@Override
-	public void ingresaVehiculo(VehiculoDTO vehiculo) throws ExcepcionGenerica {
-		
+	public void ingresarVehiculo(VehiculoDTO vehiculo) throws ExcepcionGenerica {
 		
 		int numVehiculo = vehiculoService.contarVehiculoXTipo(vehiculo.getTipo());
 		boolean hayEspacioVehiculo = numVehiculo < tipoVehiculoService.capacidadPorTipo(vehiculo.getTipo());
@@ -44,7 +43,7 @@ public class VigilanteServiceImpl implements VigilanteService {
 		validarVehiculoAdentro(vehiculo.getPlaca());
 		if (hayEspacioVehiculo && puedeEntrarPorDigitoYDia) {
 			vehiculo.setFechaIngreso(new Date());
-			vehiculoService.insertarVehivculo(vehiculo);
+			vehiculoService.ingresarVehiculo(vehiculo);
 		}else if(!hayEspacioVehiculo){
 			throw new ExecptionNoHayEspacioTipoVehiculo(MensajesConstantes.MENSAJE_NO_HAY_ESPACIO);
 		}else {
