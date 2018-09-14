@@ -7,9 +7,13 @@ import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.boot.test.web.client.TestRestTemplate;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.test.context.jdbc.Sql;
 import org.springframework.test.context.junit4.SpringRunner;
 
 import static org.junit.Assert.assertEquals;
+
+import org.junit.After;
+import org.junit.Before;
 
 import co.com.parking.parkingpractice.models.SalidaVehiculoDTO;
 import co.com.parking.parkingpractice.models.VehiculoDTO;
@@ -22,19 +26,17 @@ public class IntegrationTestVigilante {
     @Autowired
     private TestRestTemplate restTemplate;
     
-    /*@Before
+    @Before
+    @Sql({"/data-test-before.sql"})
     public void setUp() {
-    	VehiculoDTO vehiculoDTO = new VehiculoDTO("LGG93D", "M");
-    	vehiculoDTO.setFechaIngreso(new Date());
-    	service.insertarVehivculo(vehiculoDTO);
+    	// Insert datos
     }
     
     @After
-    public void Restart() throws ExceptionSalidaNoRegistrada {
-    	VehiculoDTO vehiculoDTO = new VehiculoDTO("LGG93D", "M");
-    	vehiculoDTO.setFechaIngreso(new Date());
-    	service.actualizarSalidaVehiculo(vehiculoDTO);
-    }*/
+    @Sql({"/data-test-after.sql"})
+    public void Restart() {
+    	// Eliminar datos
+    }
 	
     // Prueba para realizar una insercion de un vehiculo 
 	@Test
@@ -95,11 +97,11 @@ public class IntegrationTestVigilante {
 		// Inicializando los objetos para la prueba
 		VehiculoDTO vehiculoDTO = new VehiculoDTO("KXZ66E", "M");
 		
-		ResponseEntity<SalidaVehiculoDTO> responseEntity1 =
+		ResponseEntity<SalidaVehiculoDTO> responseEntity =
 	            restTemplate.postForEntity("/api/salir", vehiculoDTO, SalidaVehiculoDTO.class);
 		
-		assertEquals(HttpStatus.OK, responseEntity1.getStatusCode());
-		assertEquals(vehiculoDTO.getPlaca(), responseEntity1.getBody().getPlaca());
+		assertEquals(HttpStatus.OK, responseEntity.getStatusCode());
+		assertEquals(vehiculoDTO.getPlaca(), responseEntity.getBody().getPlaca());
 		
 	}
 }
